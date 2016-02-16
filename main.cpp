@@ -8,7 +8,7 @@
 #define THIS_FILE "APP"
  
 #define SIP_DOMAIN "staging.voip.lifeisbetteron.com"
-#define SIP_USER "1001"
+#define SIP_USER "1234"
 #define SIP_PASSWD "password"
 
 #include <iostream>
