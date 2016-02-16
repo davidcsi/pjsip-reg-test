@@ -7,7 +7,7 @@
 
 #define THIS_FILE "APP"
  
-#define SIP_DOMAIN "staging.voip.lifeisbetteron.com"
+#define SIP_DOMAIN "domain.com"
 #define SIP_USER "1234"
 #define SIP_PASSWD "password"
 
@@ -18,7 +18,6 @@
 using namespace std; 
 
 static void on_incoming_call(pjsua_acc_id acc_id, pjsua_call_id call_id, pjsip_rx_data *rdata);
-
 
 /* Callback called by the library upon receiving incoming call */
 static void on_incoming_call(pjsua_acc_id acc_id, pjsua_call_id call_id, pjsip_rx_data *rdata)
@@ -149,7 +148,7 @@ int main(int argc, char *argv[])
     for( long int count=40983401; count <= 40983402; count++ )
     {
         stringstream strs, username_strm;
-        strs << "sip:" << count << "@staging.voip.lifeisbetteron.com";
+        strs << "sip:" << count << "@domain.com";
         username_strm << count;
         
         string act_id = strs.str();
@@ -180,7 +179,7 @@ int main(int argc, char *argv[])
     
     /* If URL is specified, make call to the URL. */
     //if (argc > 1) {
-        pj_str_t uri = pj_str("40804601@staging.voip.lifeisbetteron.com");
+        pj_str_t uri = pj_str("1234@domain.com");
         status = pjsua_call_make_call(acc_id, &uri, 0, NULL, NULL, NULL);
         if (status != PJ_SUCCESS) error_exit("Error making call", status);
     //}
