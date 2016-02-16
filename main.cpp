@@ -13,7 +13,10 @@
 
 #include <iostream>
 #include <sstream>
+/*
 #include "/Users/david/pjproject-2.3/pjsip/include/pjsua-lib/pjsua.h"
+*/
+#include "pjsua-lib/pjsua.h"
 
 using namespace std; 
 
