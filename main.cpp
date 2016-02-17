@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   main.cpp
  * Author: david
  *
@@ -6,7 +6,7 @@
  */
 
 #define THIS_FILE "APP"
- 
+
 #define SIP_DOMAIN "domain.com"
 #define SIP_USER "1234"
 #define SIP_PASSWD "password"
@@ -18,7 +18,7 @@
 */
 #include "pjsua-lib/pjsua.h"
 
-using namespace std; 
+using namespace std;
 
 static void on_incoming_call(pjsua_acc_id acc_id, pjsua_call_id call_id, pjsip_rx_data *rdata);
 
@@ -26,7 +26,7 @@ static void on_incoming_call(pjsua_acc_id acc_id, pjsua_call_id call_id, pjsip_r
 static void on_incoming_call(pjsua_acc_id acc_id, pjsua_call_id call_id, pjsip_rx_data *rdata)
 {
     pjsua_call_info ci;
-    
+
 
     PJ_UNUSED_ARG(acc_id);
     PJ_UNUSED_ARG(rdata);
@@ -44,7 +44,7 @@ static void on_reg_state(pjsua_call_id acc_id)
 {
     pjsua_acc_info accinfo;
     pjsua_acc_config cfg;
-    
+
     pjsua_acc_get_info(acc_id, &accinfo);
     PJ_LOG(3,(THIS_FILE,"Reg state changed for account %d : %d",acc_id,accinfo.status));
     if( accinfo.status == 200 )
@@ -53,14 +53,14 @@ static void on_reg_state(pjsua_call_id acc_id)
         cout << "account user data: " << pjsua_acc_get_user_data( 0 ) << endl;
     }
 
-    
+
     /*
     if (ci.state_text == PJSUA_CALL_MEDIA_ACTIVE) {
         // When media is active, connect call to sound device.
         pjsua_conf_connect(ci.conf_slot, 0);
         pjsua_conf_connect(0, ci.conf_slot);
-    } 
-    */   
+    }
+    */
 }
 
 /* Callback called by the library when call's state has changed */
@@ -73,7 +73,7 @@ static void on_call_state(pjsua_call_id call_id, pjsip_event *e)
     pjsua_call_get_info(call_id, &ci);
     PJ_LOG( 3,(THIS_FILE, "Call %d state=%.*s", call_id, (int)ci.state_text.slen, ci.state_text.ptr) );
 }
- 
+
 /* Callback called by the library when call's media state has changed */
 static void on_call_media_state(pjsua_call_id call_id)
 {
@@ -87,7 +87,7 @@ static void on_call_media_state(pjsua_call_id call_id)
         pjsua_conf_connect(0, ci.conf_slot);
     }
 }
- 
+
 /* Display error and exit application */
 static void error_exit(const char *title, pj_status_t status)
 {
@@ -103,14 +103,16 @@ static void error_exit(const char *title, pj_status_t status)
   */
 int main(int argc, char *argv[])
 {
+    /*
     std::string username = argv[1];
     std::string password = argv[2];
     std::string domain = argv[3];
-    
+
     cout << "username: " << username << std::endl;
     cout << "password: " << password << std::endl;
     cout << "domain: " << domain << std::endl;
-    
+    */
+
     pjsua_acc_id acc_id;
     pj_status_t status;
 
@@ -156,20 +158,20 @@ int main(int argc, char *argv[])
     if (status != PJ_SUCCESS) error_exit("Error starting pjsua", status);
 
     /* Register to SIP server by creating SIP account. */
-    for( long int count=atoi(argv[1]); count <= atoi(argv[1]); count++ )
+    for( long int count=40983401; count <= 40983401; count++ )
     {
         stringstream strs, username_strm;
-        //strs << "sip:" << count << "@domain.com";
-        strs << "sip:" << username.c_str() << "@" << domain.c_str() ;
-        printf("%s\n", &strs );
+        strs << "sip:" << count << "@domain.com";
+        //strs << "sip:" << username.c_str() << "@" << domain.c_str() ;
+        //printf("%s\n", &strs );
         username_strm << count;
-        
+
         string act_id = strs.str();
         string username_tmp = username_strm.str();
-        
+
         char* account_id = (char*) act_id.c_str();
         char* user_id = (char*) username_tmp.c_str();
-        
+
         pjsua_acc_config cfg;
 
         pjsua_acc_config_default(&cfg);
@@ -189,7 +191,7 @@ int main(int argc, char *argv[])
 
     }
 
-    
+
     /* If URL is specified, make call to the URL. */
     //if (argc > 1) {
         pj_str_t uri = pj_str("1234@domain.com");
