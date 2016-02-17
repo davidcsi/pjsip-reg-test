@@ -103,6 +103,14 @@ static void error_exit(const char *title, pj_status_t status)
   */
 int main(int argc, char *argv[])
 {
+    std::string username = argv[1];
+    std::string password = argv[2];
+    std::string domain = argv[3];
+    
+    cout << "username: " << username << std::endl;
+    cout << "password: " << password << std::endl;
+    cout << "domain: " << domain << std::endl;
+    
     pjsua_acc_id acc_id;
     pj_status_t status;
 
@@ -148,10 +156,12 @@ int main(int argc, char *argv[])
     if (status != PJ_SUCCESS) error_exit("Error starting pjsua", status);
 
     /* Register to SIP server by creating SIP account. */
-    for( long int count=40983401; count <= 40983402; count++ )
+    for( long int count=atoi(argv[1]); count <= atoi(argv[1]); count++ )
     {
         stringstream strs, username_strm;
-        strs << "sip:" << count << "@domain.com";
+        //strs << "sip:" << count << "@domain.com";
+        strs << "sip:" << username.c_str() << "@" << domain.c_str() ;
+        printf("%s\n", &strs );
         username_strm << count;
         
         string act_id = strs.str();
